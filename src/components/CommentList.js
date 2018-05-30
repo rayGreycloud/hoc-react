@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 class CommentList extends Component {
   renderComments() {
-    return this.props.comments.map(comment => <li key={comment}>{comment}</li>);
+    return this.props.comments.map(comment => (
+      <li key={comment.id}>{comment.name}</li>
+    ));
   }
 
   render() {
