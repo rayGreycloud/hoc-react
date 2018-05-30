@@ -18,6 +18,13 @@ class CommentBox extends Component {
     this.setState({ comment: '' });
   };
 
+  handleFetch = e => {
+    e.preventDefault();
+
+    this.props.fetchComments();
+    this.props.history.push('/');
+  };
+
   render() {
     return (
       <div>
@@ -28,7 +35,7 @@ class CommentBox extends Component {
             <button className="submit-comment">Submit Comment</button>
           </div>
         </form>
-        <button className="fetch-comments" onClick={this.props.fetchComments}>
+        <button className="fetch-comments" onClick={this.handleFetch}>
           Fetch Comments
         </button>
       </div>
