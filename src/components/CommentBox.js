@@ -7,6 +7,20 @@ import * as actions from 'actions';
 class CommentBox extends Component {
   state = { comment: '' };
 
+  componentDidMount = () => {
+    this.shouldRunAway();
+  };
+
+  componentDidUpdate = () => {
+    this.shouldRunAway();
+  };
+
+  shouldRunAway = () => {
+    if (!this.props.auth) {
+      this.props.history.push('/');
+    }
+  };
+
   handleChange = e => {
     this.setState({ comment: e.target.value });
   };
@@ -44,8 +58,13 @@ class CommentBox extends Component {
 }
 
 CommentBox.propTypes = {
+  auth: PropTypes.bool.isRequired,
   saveComment: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired
 };
 
-export default connect(null, actions)(CommentBox);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, actions)(CommentBox);
