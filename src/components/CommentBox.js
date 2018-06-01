@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import requireAuth from 'components/requireAuth';
 
 import * as actions from 'actions';
 
 class CommentBox extends Component {
   state = { comment: '' };
-
-  componentDidMount = () => {
-    this.shouldRunAway();
-  };
-
-  componentDidUpdate = () => {
-    this.shouldRunAway();
-  };
-
-  shouldRunAway = () => {
-    if (!this.props.auth) {
-      this.props.history.push('/');
-    }
-  };
 
   handleChange = e => {
     this.setState({ comment: e.target.value });
@@ -63,8 +50,4 @@ CommentBox.propTypes = {
   fetchComments: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, actions)(CommentBox);
+export default connect(null, actions)(requireAuth(CommentBox));
